@@ -1,0 +1,40 @@
+{
+	"expo": {
+		"name": "swifty-companion",
+		"slug": "swifty-companion",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icons/icon.png",
+		"userInterfaceStyle": "automatic",
+		"splash": {
+			"image": "./assets/icons/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"assetBundlePatterns": ["**/*"],
+		"plugins": [
+			[
+				"expo-local-authentication",
+				{
+				"faceIDPermission": "Let us use FaceID for a faster login."
+				}
+			]
+		],
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.42.swiftycompanion"
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/icons/icon.png",
+				"backgroundColor": "#ffffff"
+			},
+			"package": "com.42.swiftycompanion"
+		},
+		"web": {
+			"favicon": "./assets/icons/favicon.png",
+			"bundler": "metro"
+		},
+		"plugins": ["expo-asset"]
+	}
+}
