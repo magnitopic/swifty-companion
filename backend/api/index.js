@@ -40,7 +40,34 @@ const getAccessToken = async () => {
 	}
 };
 
-(async () => {
+const make42Request = async (endpoint, params, retryCount = 0) => {
+	const MAX_RETRIES = 1; // Prevent infinite loop
+
+	const token = await getAccessToken();
+
+	try {
+		const response = await axios.get(
+			`https://api.intra.42.fr/v2/${endpoint}`,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				params,
+			}
+		);
+
+		return response.data;
+	} catch (error) {
+		if (error.response?.status === 401 && retryCount < MAX_RETRIES) {
+			cachedToken = null;
+			tokenExpiry = null;
+			return make42Request(endpoint, params, retryCount + 1);
+		}
+		throw error;
+	}
+};
+
+/* (async () => {
 	try {
 		const token = await getAccessToken();
 		console.log("Token:", token);
@@ -48,4 +75,4 @@ const getAccessToken = async () => {
 		console.error("❌ Error getting token:", error);
 		process.exit(1);
 	}
-})();
+})(); */
