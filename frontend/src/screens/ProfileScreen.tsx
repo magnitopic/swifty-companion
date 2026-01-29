@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useEffect } from "react";
 import { getUser } from "../services/api";
+import { getFullUserLogin } from "../utils/userProfile";
 
 const ProfileScreen: React.FC = () => {
 	const [userId, setUserId] = useState<string>("NULL");
@@ -14,21 +15,7 @@ const ProfileScreen: React.FC = () => {
 			try {
 				const profile = await getUser("fdiaz-gu");
 
-				let title_id = profile.titles_users.filter(
-					(title) => title.selected === true
-				)[0]?.title_id;
-
-				let fullUserLogin = title_id
-					? profile.titles.find((title) => title.id === title_id)
-							?.name
-					: null;
-
-				if (fullUserLogin != null) {
-					fullUserLogin = fullUserLogin.replace(
-						"%login",
-						profile.login
-					);
-				} else fullUserLogin = profile.login;
+				let fullUserLogin = getFullUserLogin(profile);
 
 				setUserId(profile.id);
 				setUserName(profile.login);
