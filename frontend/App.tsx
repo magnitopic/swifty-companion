@@ -8,7 +8,7 @@ import SearchScreen from "./src/screens/SearchScreen";
 export default function App() {
 	const [currentScreen, setCurrentScreen] = useState<
 		"ProfileScreen" | "SearchScreen"
-	>("SearchScreen");
+	>("ProfileScreen");
 
 	return (
 		<>
