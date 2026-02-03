@@ -20,6 +20,9 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 	lvl,
 	isAlumni,
 }) => {
+	const levelProgress = (lvl % 1) * 100;
+	const currentLevel = Math.floor(lvl);
+
 	return (
 		<View className="items-center py-6">
 			<Image
@@ -37,12 +40,28 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 				{fullLogin}
 			</Text>
 			<View className="flex-row mt-4">
-				<Text className="text-font-main mr-4">Wallet: {wallet}₳</Text>
+				<Text className="text-font-main mr-4">
+					<Text className="text-accent-yellow">Wallet: </Text>
+					{wallet}₳
+				</Text>
 				<Text className="text-font-main">
-					Eval Points: {correction_points}
+					<Text className="text-accent">Eval Points: </Text>
+					{correction_points}
 				</Text>
 			</View>
-			<Text className="text-font-main mt-2 text-xl">Level: {lvl}%</Text>
+
+			<View className="mt-4 w-full px-8">
+				<Text className="text-font-main text-xl mb-2 text-center">
+					<Text className="text-primary">Level: </Text>
+					{lvl}%
+				</Text>
+				<View className="w-full h-2 bg-background-tertiary rounded-full overflow-hidden">
+					<View
+						className="h-full bg-primary rounded-full"
+						style={{ width: `${levelProgress}%` }}
+					/>
+				</View>
+			</View>
 		</View>
 	);
 };
