@@ -14,4 +14,19 @@ const getFullUserLogin = (profile: any) => {
 	return fullUserLogin;
 };
 
-export { getFullUserLogin };
+const getUserLevel = (profile: any) => {
+	let userLvl;
+	profile.cursus_users.filter((cursus) => {
+		if (cursus.cursus_id === 21) {
+			userLvl = cursus.level;
+		}
+	});
+
+	if (userLvl == null) {
+		userLvl = 0.0;
+	}
+
+	return userLvl;
+};
+
+export { getFullUserLogin, getUserLevel };
