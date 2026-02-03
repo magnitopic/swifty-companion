@@ -13,7 +13,7 @@ const ProfileScreen: React.FC = () => {
 		const fetchUserProfile = async () => {
 			try {
 				setLoading(true);
-				const data = await getUser("clatink");
+				const data = await getUser("alaparic");
 
 				if (!data || data === undefined || data.error)
 					throw new Error(data?.error || "Error fetching user data");

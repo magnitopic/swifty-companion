@@ -9,14 +9,14 @@
 		"splash": {
 			"image": "./assets/icons/splash.png",
 			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
+			"backgroundColor": "#000000"
 		},
 		"assetBundlePatterns": ["**/*"],
 		"plugins": [
 			[
 				"expo-local-authentication",
 				{
-				"faceIDPermission": "Let us use FaceID for a faster login."
+					"faceIDPermission": "Let us use FaceID for a faster login."
 				}
 			]
 		],
@@ -27,7 +27,7 @@
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/icons/icon.png",
-				"backgroundColor": "#ffffff"
+				"backgroundColor": "#000000"
 			},
 			"package": "com.42.swiftycompanion"
 		},
