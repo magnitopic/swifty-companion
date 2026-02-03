@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import { getUser } from "../services/api";
-import { getFullUserLogin, getUserLevel } from "../utils/userProfile";
-import { ProfileHeader } from "../components/ProfileHeader";
+import {
+	getFullUserLogin,
+	getUserLevel,
+	getUserSkills,
+} from "../utils/userProfile";
+import ProfileHeader from "../components/ProfileHeader";
+import ProfileSkills from "../components/ProfileSkills";
 
 const ProfileScreen: React.FC = () => {
 	const [profile, setProfile] = useState<any>(null);
@@ -48,7 +53,7 @@ const ProfileScreen: React.FC = () => {
 	}
 
 	return (
-		<View className="flex-1 bg-background-main">
+		<ScrollView className="flex-1 bg-background-main">
 			<ProfileHeader
 				imageUrl={profile.image?.link || ""}
 				fullLogin={getFullUserLogin(profile)}
@@ -56,8 +61,10 @@ const ProfileScreen: React.FC = () => {
 				wallet={profile.wallet}
 				correction_points={profile.correction_point}
 				lvl={getUserLevel(profile)}
+				isAlumni={profile["alumni?"]}
 			/>
-		</View>
+			<ProfileSkills skills={getUserSkills(profile)} />
+		</ScrollView>
 	);
 };
 

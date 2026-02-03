@@ -29,4 +29,17 @@ const getUserLevel = (profile: any) => {
 	return userLvl;
 };
 
-export { getFullUserLogin, getUserLevel };
+const getUserSkills = (profile: any) => {
+	let skills: Array<{ name: string; level: number }> = [];
+	profile.cursus_users.filter((cursus) => {
+		if (cursus.cursus_id === 21) {
+			skills = cursus.skills;
+		}
+	});
+
+	return skills;
+};
+
+const getUserProjects = (profile: any) => {};
+
+export { getFullUserLogin, getUserLevel, getUserSkills, getUserProjects };
