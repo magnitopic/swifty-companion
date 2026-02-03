@@ -13,14 +13,15 @@ const ProfileScreen: React.FC = () => {
 		const fetchUserProfile = async () => {
 			try {
 				setLoading(true);
-				const data = await getUser("alaparic");
-				if (!data || data === undefined) {
-					throw new Error("Error fetching user data");
-				}
+				const data = await getUser("clatink");
+
+				if (!data || data === undefined || data.error)
+					throw new Error(data?.error || "Error fetching user data");
+
 				setProfile(data);
+				setError(null);
 			} catch (error) {
-				console.error("Failed to fetch user profile:", error);
-				setError("Failed to load profile");
+				setError("Failed to load profile ❌");
 			} finally {
 				setLoading(false);
 			}
@@ -39,7 +40,7 @@ const ProfileScreen: React.FC = () => {
 	if (error || !profile) {
 		return (
 			<View className="flex-1 bg-background-main items-center justify-center">
-				<Text className="text-font-main">
+				<Text className="text-font-main text-2xl">
 					{error || "No profile found"}
 				</Text>
 			</View>
