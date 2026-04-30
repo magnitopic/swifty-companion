@@ -8,8 +8,14 @@ import {
 } from "../utils/userProfile";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileSkills from "../components/ProfileSkills";
+import NavHeader from "../components/NavHeader";
 
-const ProfileScreen: React.FC = () => {
+interface ProfileScreenProps {
+	login: string;
+	onBack: () => void;
+}
+
+const ProfileScreen: React.FC<ProfileScreenProps> = ({ login, onBack }) => {
 	const [profile, setProfile] = useState<any>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
@@ -18,7 +24,7 @@ const ProfileScreen: React.FC = () => {
 		const fetchUserProfile = async () => {
 			try {
 				setLoading(true);
-				const data = await getUser("alaparic");
+				const data = await getUser(login);
 
 				if (!data || data === undefined || data.error)
 					throw new Error(data?.error || "Error fetching user data");
@@ -32,7 +38,7 @@ const ProfileScreen: React.FC = () => {
 			}
 		};
 		fetchUserProfile();
-	}, []);
+	}, [login]);
 
 	if (loading) {
 		return (
@@ -44,16 +50,20 @@ const ProfileScreen: React.FC = () => {
 
 	if (error || !profile) {
 		return (
-			<View className="flex-1 bg-background-main items-center justify-center">
-				<Text className="text-font-main text-2xl">
-					{error || "No profile found"}
-				</Text>
+			<View className="flex-1 bg-background-main">
+				<NavHeader title={login} onBack={onBack} />
+				<View className="flex-1 items-center justify-center">
+					<Text className="text-font-main text-2xl">
+						{error || "No profile found"}
+					</Text>
+				</View>
 			</View>
 		);
 	}
 
 	return (
 		<ScrollView className="flex-1 bg-background-main">
+			<NavHeader title={login} onBack={onBack} />
 			<ProfileHeader
 				imageUrl={profile.image?.link || ""}
 				fullLogin={getFullUserLogin(profile)}

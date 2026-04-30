@@ -8,12 +8,25 @@ import SearchScreen from "./src/screens/SearchScreen";
 export default function App() {
 	const [currentScreen, setCurrentScreen] = useState<
 		"ProfileScreen" | "SearchScreen"
-	>("ProfileScreen");
+	>("SearchScreen");
+	const [selectedLogin, setSelectedLogin] = useState<string>("");
+
+	const navigateToProfile = (login: string) => {
+		setSelectedLogin(login);
+		setCurrentScreen("ProfileScreen");
+	};
 
 	return (
 		<>
-			{currentScreen === "ProfileScreen" && <ProfileScreen />}
-			{currentScreen === "SearchScreen" && <SearchScreen />}
+			{currentScreen === "ProfileScreen" && (
+				<ProfileScreen
+					login={selectedLogin}
+					onBack={() => setCurrentScreen("SearchScreen")}
+				/>
+			)}
+			{currentScreen === "SearchScreen" && (
+				<SearchScreen onSelectUser={navigateToProfile} />
+			)}
 		</>
 	);
 }
