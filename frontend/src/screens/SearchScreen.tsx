@@ -26,7 +26,8 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSelectUser }) => {
 				setLoading(true);
 				setError(null);
 				const data = await searchUser(query.trim());
-				if (!Array.isArray(data)) throw new Error("Unexpected response");
+				if (!Array.isArray(data))
+					throw new Error("An error occurred while searching...");
 				setUsers(data);
 				if (data.length === 0) setError("No users found 😕");
 			} catch (error: any) {

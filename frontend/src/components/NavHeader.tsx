@@ -14,13 +14,12 @@ const NavHeader: React.FC<NavHeaderProps> = ({ title, onBack }) => {
 				className="flex-row items-center mr-3"
 				hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
 			>
-				<Text className="text-primary text-2xl font-bold">‹</Text>
-				<Text className="text-primary text-sm font-semibold ml-1">Search</Text>
+				<Text className="text-primary text-lg font-bold prb-2">‹</Text>
+				<Text className="text-primary text-sm font-bold">Search</Text>
 			</TouchableOpacity>
 			<View className="flex-1 items-center">
 				<Text className="text-font-main text-lg font-bold">{title}</Text>
 			</View>
-			{/* spacer to visually centre the title */}
 			<View className="w-16" />
 		</View>
 	);
