@@ -5,9 +5,11 @@ import {
 	getFullUserLogin,
 	getUserLevel,
 	getUserSkills,
+	getUserProjects,
 } from "../utils/userProfile";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileSkills from "../components/ProfileSkills";
+import ProfileProjects from "../components/ProfileProjects";
 import NavHeader from "../components/NavHeader";
 
 interface ProfileScreenProps {
@@ -74,6 +76,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ login, onBack }) => {
 				isAlumni={profile["alumni?"]}
 			/>
 			<ProfileSkills skills={getUserSkills(profile)} />
+			<ProfileProjects projects={getUserProjects(profile)} />
 		</ScrollView>
 	);
 };
