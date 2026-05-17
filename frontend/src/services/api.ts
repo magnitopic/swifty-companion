@@ -1,8 +1,9 @@
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
-export const searchUser = async (login: string) => {
+export const searchUser = async (login: string, signal?: AbortSignal) => {
 	const response = await fetch(
-		`${API_BASE_URL}?endpoint=users&search[login]=${login}`
+		`${API_BASE_URL}?endpoint=users&search[login]=${login}&per_page=10`,
+		{ signal }
 	);
 	return response.json();
 };

@@ -21,16 +21,19 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSelectUser }) => {
 			return;
 		}
 
+		const controller = new AbortController();
+
 		const timeout = setTimeout(async () => {
 			try {
 				setLoading(true);
 				setError(null);
-				const data = await searchUser(query.trim());
+				const data = await searchUser(query.trim(), controller.signal);
 				if (!Array.isArray(data))
 					throw new Error("An error occurred while searching...");
 				setUsers(data);
 				if (data.length === 0) setError("No users found 😕");
 			} catch (error: any) {
+				if (error.name === "AbortError") return;
 				setError("Failed to search users ❌");
 				setUsers([]);
 			} finally {
@@ -38,7 +41,10 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSelectUser }) => {
 			}
 		}, 500);
 
-		return () => clearTimeout(timeout);
+		return () => {
+			clearTimeout(timeout);
+			controller.abort();
+		};
 	}, [query]);
 
 	const renderContent = () => {
